@@ -3267,7 +3267,7 @@ export const migrationConfig: MigrationNetwork[] = [
     abi: ethAbiV1,
     abiV2: ethAbiV2,
     id: sepolia.id,
-    explorer: polygonAmoy.blockExplorers.default.url,
+    explorer: sepolia.blockExplorers.default.url,
   },
   {
     name: "bsc",

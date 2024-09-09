@@ -13,53 +13,53 @@ import youtube from "../src/images/socials/youtube.svg";
 const Products = [
   {
     title: "DEX (aeSwap)",
-    link: "#",
+    link: "https://swap.archethic.net",
   },
   {
     title: "Wallet (aeWallet)",
-    link: "#",
+    link: "https://www.archethic.net/wallet.html",
   },
   {
     title: "Bridge (aeBridge)",
-    link: "#",
+    link: "https://bridge.archethic.net",
   },
   {
     title: "Explorer (aeExplorer)",
-    link: "#",
+    link: "https://explorer.archethic.net",
   },
   {
     title: "Biometric cold wallet",
-    link: "#",
+    link: "https://www.archethic.net/wallet_hw.html",
   },
 ];
 
 const Ressources = [
   {
     title: "Knowledge center",
-    link: "#",
+    link: "https://wiki.archethic.net",
   },
   {
     title: "White paper",
-    link: "#",
+    link: "https://www.archethic.net/assets/files/white_paper.pdf",
   },
   {
     title: "Technical paper",
-    link: "#",
+    link: "https://www.archethic.net/assets/files/technical_paper.pdf",
   },
 ];
 
 const General = [
   {
     title: "Contact Us",
-    link: "#",
+    link: "mailto:contact@archethic.net",
   },
   {
     title: "Terms of Use",
-    link: "#",
+    link: "https://www.archethic.net/terms.html",
   },
   {
     title: "Privacy Policy",
-    link: "#",
+    link: "https://www.archethic.net/privacy.html",
   },
 ];
 
@@ -170,7 +170,7 @@ export function FooterLinks({
     <div
       className={cn(
         "flex flex-col items-center lg:items-start gap-[9px] col-span-12 p-[10px]",
-        className
+        className,
       )}
     >
       <p className="font-medium text-18 lg:text-22 uppercase">{title}</p>
@@ -179,6 +179,7 @@ export function FooterLinks({
           href={link.link}
           key={index}
           className="text-14 lg:text-16 2xl:text-18  text-muted-dark"
+          target={"_blank"}
         >
           {link.title}
         </a>

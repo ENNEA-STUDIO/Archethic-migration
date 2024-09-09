@@ -72,14 +72,19 @@ export default function Overview() {
               <div className="w-px bg-border  min-h-full"></div>
               <div className="flex flex-col gap-[10px]">
                 <p className="text-12 xl:text-15 2xl:text-16 font-medium ">
-                  "Archethic is updating its ERC-20 UCO token to a new version
+                  Archethic is updating its ERC-20 UCO token to a new version
                   that is more secure and harmonized across all blockchains. If
                   you hold UCO tokens, it is important to migrate them to this
                   new version to ensure future compatibility.
                 </p>
-                <Button variant="secondary" className="w-fit">
-                  Learn more
-                </Button>
+                <a
+                  href={"https://wiki.archethic.net/category/FAQ"}
+                  target={"_blank"}
+                >
+                  <Button variant="secondary" className="w-fit">
+                    Learn more
+                  </Button>
+                </a>
               </div>
             </div>
             <div className="flex gap-[8px] lg:gap-[16px] xl:gap-[32px] items-center w-full">
