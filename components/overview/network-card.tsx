@@ -50,12 +50,14 @@ export default function NetworkCard({
       <div className="flex flex-col items-center gap-[6px] xl:gap-[14px]">
         <img src={uco} alt="uco" className="w-[29px] h-[24.701px]" />
         <p
-          className="text-28 xl:text-35 font-medium "
+          className="text-28 xl:text-35 font-medium"
           data-aos-duration="600"
           data-aos="fade-up"
           data-aos-delay={delay}
         >
-          {formatNumber(Math.round(+balance))}
+          {+balance !== 0 && Math.floor(+balance) < 1
+            ? "< 0"
+            : formatNumber(Math.round(+balance))}
         </p>
         <p className="text-muted text-16 xl:text-18 font-medium">
           {balanceLeft ? "Balance Left" : "UCO"}

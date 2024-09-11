@@ -14,7 +14,7 @@ import {
   useWaitForTransactionReceipt,
   useWriteContract,
 } from "wagmi";
-import { formatEther, formatUnits, parseUnits } from "viem";
+import { formatEther, parseUnits } from "viem";
 import { waitForTransactionReceipt } from "viem/actions";
 import { config } from "../../config/wagmi/config.ts";
 import Congratulations from "./congratulations.tsx";
@@ -80,13 +80,12 @@ export default function MigrationNetworks({
     // await waitForTransaction({ chainId: network.id, hash: tx });
     await waitForTransactionReceipt(config.getClient(), { hash: tx });
     onMigrationComplete();
-    setCongratulations(true);
+    setTimeout(() => setCongratulations(true), 2000);
   };
 
   const sendInputChangeHandle = (event: ChangeEvent<HTMLInputElement>) => {
-    const regex = /[0-9]*\.?[0-9]*/g;
+    const regex = /^[0-9]*\.?[0-9]{0,18}$/g;
     const value = event.target.value;
-
     if (!regex.test(value)) return;
 
     if (parseUnits(value, 18) > network.balanceV1) return;
@@ -119,7 +118,7 @@ export default function MigrationNetworks({
         <div className="w-full md:w-px bg-border-dark h-px md:h-[232px]"></div>
         <div className="flex flex-col gap-[24px] lg:gap-[32px] w-full md:w-2/3 md:pl-[36px] ">
           <div className="flex flex-col lg:flex-row lg:gap-[18px] xl:gap-[30px]">
-            <div className="w-full flex flex-col gap-[8px]">
+            <div className="w-full flex flex-col gap-[8px] relative">
               <label className="text-16 font-medium">Send</label>
               <div className="relative">
                 <Input
@@ -143,6 +142,13 @@ export default function MigrationNetworks({
                   </button>
                 </div>
               </div>
+              {sendInput && parseUnits(sendInput, 8) === 0n && (
+                <div
+                  className={"text-red-700 text-sm -bottom-4 lg:absolute pl-1"}
+                >
+                  You can't migrate less than 10e-8 token
+                </div>
+              )}
             </div>
             <div className="h-[70px] w-[106px] lg:w-[98px] lg:h-[117px] flex items-center justify-center mx-auto">
               <img
@@ -163,10 +169,7 @@ export default function MigrationNetworks({
                 iconY
                 placeholder="0.00"
                 icon={<img src={uco} alt="uco" />}
-                value={formatUnits(parseUnits(sendInput, 8), 8)}
-                // value={Math.floor(+sendInput * 10 ** 8) / 10 ** 8}
-                // value={(+sendInput).toFixed(8)}
-                // value={Math.trunc(+sendInput).toFixed(8)} c
+                value={`${sendInput.split(".")[0]}${sendInput.split(".")[1]?.length > 0 ? `.${sendInput.split(".")[1].slice(0, 8)}` : ""}`}
                 readOnly
               />
             </div>
@@ -174,7 +177,9 @@ export default function MigrationNetworks({
           <Button
             className="w-fit mx-auto"
             onClick={hasAllowance ? migrate : approve}
-            disabled={isPending || isConfirming}
+            disabled={
+              isPending || isConfirming || parseUnits(sendInput, 8) === 0n
+            }
           >
             {isPending || isConfirming
               ? "Confirming..."

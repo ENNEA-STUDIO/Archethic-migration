@@ -42,9 +42,11 @@ export default function BalanceCard({
         duration: 2,
         ease: "power3.inOut",
         onUpdate: () => {
-          counter.textContent = formatNumber(
-            Math.round(+countRef.current.value),
-          );
+          counter.textContent =
+            +countRef.current.value !== 0 &&
+            Math.floor(+countRef.current.value) < 1
+              ? "<0"
+              : formatNumber(Math.round(+countRef.current.value));
         },
       });
     }
@@ -223,6 +225,13 @@ function NetworkItem({
               src={copyIcon}
               alt="copy"
               className="w-[10px] h-[10px] lg:w-[16px] lg:h-[16px]"
+              onClick={() =>
+                navigator.clipboard.writeText(
+                  version === "Version 1"
+                    ? network.v1Contract
+                    : network.v2Contract,
+                )
+              }
             />
           )}
         </div>

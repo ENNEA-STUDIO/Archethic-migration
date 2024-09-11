@@ -63,14 +63,11 @@ export default function Congratulations({
               onClick={() => onClick()}
             />
           </div>
-          <Button
-            className="w-fit mx-auto lg:mr-0"
-            onClick={() => onClick(true)}
-          >
-            Home Page <ArrowRight size="18" />
-          </Button>
         </>
       )}
+      <Button className="w-fit mx-auto lg:mr-0" onClick={() => onClick(true)}>
+        Home Page <ArrowRight size="18" />
+      </Button>
     </div>
   );
 }
