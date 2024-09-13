@@ -18,7 +18,7 @@ import { formatEther, parseUnits } from "viem";
 import { waitForTransactionReceipt } from "viem/actions";
 import { config } from "../../config/wagmi/config.ts";
 import Congratulations from "./congratulations.tsx";
-import { formatNumber } from "../../lib/utils.ts";
+import { convertTo8Digit, formatNumber } from "../../lib/utils.ts";
 
 export type MigrationNetworksProps = {
   network: MigrationNetworkWithBalance;
@@ -98,6 +98,7 @@ export default function MigrationNetworks({
       onClick={(back) => {
         back && onBack();
         setCongratulations(false);
+        setSendInput("");
       }}
       amount={sendInput}
       amountLeft={network.balanceV1}
@@ -169,7 +170,7 @@ export default function MigrationNetworks({
                 iconY
                 placeholder="0.00"
                 icon={<img src={uco} alt="uco" />}
-                value={`${sendInput.split(".")[0]}${sendInput.split(".")[1]?.length > 0 ? `.${sendInput.split(".")[1].slice(0, 8)}` : ""}`}
+                value={convertTo8Digit(sendInput)}
                 readOnly
               />
             </div>

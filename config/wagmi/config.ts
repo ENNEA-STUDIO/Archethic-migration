@@ -27,7 +27,7 @@ export const config = createConfig({
     [mainnet.id]: http(),
     [bsc.id]: http(),
     [polygon.id]: http(),
-    [sepolia.id]: http(),
+    [sepolia.id]: http("https://ethereum-sepolia-rpc.publicnode.com"),
     [polygonAmoy.id]: http(),
     [bscTestnet.id]: http(),
   },
