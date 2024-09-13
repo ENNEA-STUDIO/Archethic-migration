@@ -1,10 +1,10 @@
 import { ArrowRight } from "lucide-react";
+import { formatEther } from "viem";
+import { convertTo8Digit } from "../../lib/utils.ts";
 import txhashIcon from "../../src/images/networks/txhash-link.svg";
 import uco from "../../src/images/networks/uco.svg";
 import { Button } from "../button";
 import NewtworkCard from "./network-card";
-import { formatEther } from "viem";
-import { convertTo8Digit } from "../../lib/utils.ts";
 
 export type CongratulationsProps = {
   amount: string;
@@ -33,7 +33,9 @@ export default function Congratulations({
             <img src={uco} alt="uco" className="w-[29px] h-[24.701px]" />
           </div>
           <div className="flex items-center gap-[10px] justify-center">
-            <p className="text-13 font-medium">Tx Hash : {txHash}</p>
+            <p className="text-13 font-medium break-all">
+              Tx Hash : {txHash?.slice(0, 8)}...{txHash?.slice(-6)}
+            </p>
             <a href={`${explorer}/tx/${txHash}`} target={"_blank"}>
               <img
                 src={txhashIcon}

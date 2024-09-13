@@ -40,7 +40,7 @@ export default function NetworkCard({
       className={cn(
         "p-[28px] group flex flex-col items-center gap-[18px] xl:gap-[24px] 2xl:gap-[32px] lg:w-1/3 bg-purple-light border border-border-light rounded-[10px]",
         isMigrationStyle && "bg-transparent border-none p-0",
-        className,
+        className
       )}
     >
       <Badge className="group-hover:rotate-3 group-hover:scale-110 transition-all duration-300 border-border-light bg-transparent">
@@ -53,6 +53,7 @@ export default function NetworkCard({
           className="text-28 xl:text-35 font-medium"
           data-aos-duration="600"
           data-aos="fade-up"
+          data-aos-offset="-300"
           data-aos-delay={delay}
         >
           {+balance !== 0 && Math.floor(+balance) < 1

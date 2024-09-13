@@ -1,24 +1,24 @@
+import WormholeConnect from "@wormhole-foundation/wormhole-connect";
 import { useState } from "react";
-import arrowRight from "../../src/images/networks/arrow-right.svg";
-import { Button } from "../button";
-import BalanceCard from "./balance-card";
-import BalanceDisplay from "./balance-display";
-import MigrationNetworks from "./migration-networks";
+import { formatEther } from "viem";
 import { useAccount, useReadContracts, useSwitchChain } from "wagmi";
 import { migrationConfig } from "../../config/networks.ts";
+import { wormholeConfig } from "../../config/wormhole.ts";
+import arrowRight from "../../src/images/networks/arrow-right.svg";
 import {
   MigrationNetwork,
   MigrationNetworkWithBalance,
   Network,
 } from "../../src/types";
+import { Button } from "../button";
+import BalanceCard from "./balance-card";
+import BalanceDisplay from "./balance-display";
+import MigrationNetworks from "./migration-networks";
 import NetworkCard from "./network-card.tsx";
-import { formatEther } from "viem";
-import WormholeConnect from "@wormhole-foundation/wormhole-connect";
-import { wormholeConfig } from "../../config/wormhole.ts";
 
 export default function Overview() {
   const [migrationNetwork, setMigrationNetwork] = useState<Network | null>(
-    null,
+    null
   );
   const { switchChainAsync } = useSwitchChain();
   const [menu, setMenu] = useState("migration");
@@ -55,7 +55,7 @@ export default function Overview() {
     }));
 
   const selectedNetwork = networkWithBalances.find(
-    (m) => m.name === migrationNetwork,
+    (m) => m.name === migrationNetwork
   );
 
   return (
@@ -87,11 +87,11 @@ export default function Overview() {
                 </a>
               </div>
             </div>
-            <div className="flex gap-[8px] lg:gap-[16px] xl:gap-[32px] items-center w-full">
+            <div className="flex flex-col gap-[8px] lg:gap-[16px] md:flex-row xl:gap-[32px] items-center w-full">
               <BalanceCard
                 balance={networkWithBalances.reduce(
                   (total, current) => total + current.balanceV1,
-                  0n,
+                  0n
                 )}
                 version="Version 1"
                 onNetworkChange={(newNetworkName) =>
@@ -101,12 +101,12 @@ export default function Overview() {
               <img
                 src={arrowRight}
                 alt="arrow"
-                className="min-w-[25px] h-[25px] lg:min-w-[45px] lg:h-[45px]"
+                className="min-w-[25px] h-[25px] lg:min-w-[45px] lg:h-[45px] rotate-90 md:rotate-0"
               />
               <BalanceCard
                 balance={networkWithBalances.reduce(
                   (total, current) => total + current.balanceV2,
-                  0n,
+                  0n
                 )}
                 version="Version 2"
                 selectedNetwork={balanceSelectedNetwork}
