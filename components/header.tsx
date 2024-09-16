@@ -40,7 +40,7 @@ export default function Header() {
         {!isBridge && (
           <>
             <div className="hidden md:block">
-              <WalletAccount />
+              <WalletAccount onClose={() => setOpen(false)} />
             </div>
             {address && (
               <div
@@ -62,11 +62,11 @@ export default function Header() {
 
         {isOpen && (
           <div className="absolute top-[66px] left-[25px] right-[25px]  bg-purple-med border border-border-light rounded-[10px] p-[18px]">
-            <WalletAccount />
+            <WalletAccount onClose={() => setOpen(false)} />
           </div>
         )}
       </div>
-      <div className="py-4 flex">
+      <div className={`${isBridge ? "py-3" : ""} flex lg:py-4`}>
         <Link to={isBridge ? "/" : "/bridge"}>
           <Button size={"small"}>{isBridge ? "Migration" : "Bridge"}</Button>
         </Link>

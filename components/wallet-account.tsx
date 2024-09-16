@@ -3,7 +3,11 @@ import { useState } from "react";
 import { useAccount, useDisconnect } from "wagmi";
 import { Button } from "./button";
 
-export function WalletAccount() {
+interface Props {
+  onClose: () => void;
+}
+
+export function WalletAccount({ onClose }: Props) {
   const { address } = useAccount();
   const { disconnect } = useDisconnect();
 
@@ -35,7 +39,10 @@ export function WalletAccount() {
       <Button
         variant="secondary"
         className="text-18 justify-center h-[45px]"
-        onClick={() => disconnect()}
+        onClick={() => {
+          disconnect();
+          onClose();
+        }}
       >
         Disconnect
         <ArrowRight size="18" />
