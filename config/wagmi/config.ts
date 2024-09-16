@@ -27,8 +27,12 @@ export const config = createConfig({
     [mainnet.id]: http(),
     [bsc.id]: http(),
     [polygon.id]: http(),
-    [sepolia.id]: http("https://ethereum-sepolia-rpc.publicnode.com"),
-    [polygonAmoy.id]: http(),
+    [sepolia.id]: http(
+      "https://eth-sepolia.g.alchemy.com/v2/1tMITKguTiCIv6L_F0MZGo9MFOq2OEn4",
+    ),
+    [polygonAmoy.id]: http(
+      "https://polygon-amoy.g.alchemy.com/v2/1tMITKguTiCIv6L_F0MZGo9MFOq2OEn4",
+    ),
     [bscTestnet.id]: http(),
   },
 });
