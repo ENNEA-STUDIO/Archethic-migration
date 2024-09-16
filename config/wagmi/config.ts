@@ -11,12 +11,12 @@ const connectors = connectorsForWallets(
   [
     {
       groupName: "Recommended",
-      wallets: [injectedWallet, walletConnectWallet],
+      wallets: [injectedWallet, walletConnectWallet, walletConnectWallet],
     },
   ],
   {
     appName: "Archethic token Migration",
-    projectId: "YOUR_PROJECT_ID",
+    projectId: "4b5d58479270f9ee951a544893a2bdc7",
   },
 );
 

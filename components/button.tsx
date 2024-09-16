@@ -15,6 +15,7 @@ const buttonVariants = cva(
           "bg-transparent border-border hover:bg-none border disabled:text-muted disabled:bg-none disabled:border-border-light",
       },
       size: {
+        small: "h-8 px-[15px] py-[8px] text-sm",
         default: "h-10 px-[20px] py-[10px] xl:text-18",
         lg: "h-[54px] px-[30px] py-[15px] text-18",
       },

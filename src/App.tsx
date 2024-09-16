@@ -6,8 +6,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { config } from "../config/wagmi/config.ts";
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
-
-// import {wormholeConfig} from "@/config/wormhole.ts";
+import { Route, Routes } from "react-router-dom";
+import WormholeConnect from "@wormhole-foundation/wormhole-connect";
+import { wormholeConfig } from "../config/wormhole.ts";
 
 const queryClient = new QueryClient();
 
@@ -16,22 +17,18 @@ const App = () => {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
-          <RootLayout>
-            <Migration />
-          </RootLayout>
+          <Routes>
+            <Route path={"/"} element={<RootLayout />}>
+              <Route index element={<Migration />} />
+              <Route
+                path={"/bridge"}
+                element={<WormholeConnect config={wormholeConfig} />}
+              />
+            </Route>
+          </Routes>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
-    //    <WormholeConnect config={wormholeConfig} />
-
-    // <WagmiProvider config={config}>
-    //   <QueryClientProvider client={queryClient}>
-    //     <RainbowKitProvider>
-    //       <ConnectButton />
-    //       <Bridge />
-    //     </RainbowKitProvider>
-    //   </QueryClientProvider>
-    // </WagmiProvider>
   );
 };
 
