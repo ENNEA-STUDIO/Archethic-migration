@@ -19,6 +19,7 @@ import { waitForTransactionReceipt } from "viem/actions";
 import { config } from "../../config/wagmi/config.ts";
 import Congratulations from "./congratulations.tsx";
 import { convertTo8Digit, formatNumber } from "../../lib/utils.ts";
+import { toast } from "react-toastify";
 
 export type MigrationNetworksProps = {
   network: MigrationNetworkWithBalance;
@@ -78,9 +79,26 @@ export default function MigrationNetworks({
     });
 
     // await waitForTransaction({ chainId: network.id, hash: tx });
-    await waitForTransactionReceipt(config.getClient(), { hash: tx });
-    onMigrationComplete();
-    setTimeout(() => setCongratulations(true), 2000);
+    const { status } = await waitForTransactionReceipt(config.getClient(), {
+      hash: tx,
+    });
+    if (status === "success") {
+      onMigrationComplete();
+      setTimeout(() => setCongratulations(true), 2000);
+    } else {
+      toast.error(
+        () => (
+          <>
+            Transaction failed. You can check it
+            <a href={`${network.explorer}/tx/${tx}`} target={"_blank"}>
+              {" "}
+              here
+            </a>
+          </>
+        ),
+        { theme: "colored", position: "bottom-center" },
+      );
+    }
   };
 
   const sendInputChangeHandle = (event: ChangeEvent<HTMLInputElement>) => {

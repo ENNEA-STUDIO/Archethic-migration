@@ -169,7 +169,7 @@ export function FooterLinks({
   return (
     <div
       className={cn(
-        "flex flex-col items-center lg:items-start gap-[9px] col-span-12 p-[10px]",
+        "flex flex-col items-center lg:items-start gap-[9px] col-span-12   p-[10px]",
         className,
       )}
     >
@@ -178,7 +178,7 @@ export function FooterLinks({
         <a
           href={link.link}
           key={index}
-          className="text-14 lg:text-16 2xl:text-18  text-muted-dark"
+          className="text-14 lg:text-16 2xl:text-18  text-muted-dark text-center"
           target={"_blank"}
         >
           {link.title}

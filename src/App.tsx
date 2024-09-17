@@ -9,6 +9,8 @@ import "@rainbow-me/rainbowkit/styles.css";
 import { Route, Routes } from "react-router-dom";
 import WormholeConnect from "@wormhole-foundation/wormhole-connect";
 import { wormholeConfig } from "../config/wormhole.ts";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const queryClient = new QueryClient();
 
@@ -17,6 +19,7 @@ const App = () => {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
+          <ToastContainer />
           <Routes>
             <Route path={"/"} element={<RootLayout />}>
               <Route index element={<Migration />} />
