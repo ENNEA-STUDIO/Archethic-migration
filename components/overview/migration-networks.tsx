@@ -14,7 +14,7 @@ import {
   useWaitForTransactionReceipt,
   useWriteContract,
 } from "wagmi";
-import { formatEther, parseUnits } from "viem";
+import { ContractFunctionExecutionError, formatEther, parseUnits } from "viem";
 import { waitForTransactionReceipt } from "viem/actions";
 import { config } from "../../config/wagmi/config.ts";
 import Congratulations from "./congratulations.tsx";
@@ -71,33 +71,39 @@ export default function MigrationNetworks({
   };
 
   const migrate = async () => {
-    const tx = await writeContractAsync({
-      abi: network.abiV2,
-      address: network.v2Contract,
-      functionName: "migrate",
-      args: [parsedInputAmount],
-    });
+    try {
+      const tx = await writeContractAsync({
+        abi: network.abiV2,
+        address: network.v2Contract,
+        functionName: "migrate",
+        args: [parsedInputAmount],
+      });
 
-    // await waitForTransaction({ chainId: network.id, hash: tx });
-    const { status } = await waitForTransactionReceipt(config.getClient(), {
-      hash: tx,
-    });
-    if (status === "success") {
-      onMigrationComplete();
-      setTimeout(() => setCongratulations(true), 2000);
-    } else {
-      toast.error(
-        () => (
-          <>
-            Transaction failed. You can check it
-            <a href={`${network.explorer}/tx/${tx}`} target={"_blank"}>
-              {" "}
-              here
-            </a>
-          </>
-        ),
-        { theme: "colored", position: "bottom-center" },
-      );
+      // await waitForTransaction({ chainId: network.id, hash: tx });
+      const { status } = await waitForTransactionReceipt(config.getClient(), {
+        hash: tx,
+      });
+      if (status === "success") {
+        setTimeout(() => setCongratulations(true), 2000);
+      } else {
+        onMigrationComplete();
+        toast.error(
+          () => (
+            <>
+              Transaction failed. You can check it
+              <a href={`${network.explorer}/tx/${tx}`} target={"_blank"}>
+                {" "}
+                here
+              </a>
+            </>
+          ),
+          { theme: "colored", position: "bottom-center" },
+        );
+      }
+    } catch (e: any) {
+      const error = e as ContractFunctionExecutionError;
+      toast.error(error.cause.shortMessage);
+      console.error(error);
     }
   };
 
