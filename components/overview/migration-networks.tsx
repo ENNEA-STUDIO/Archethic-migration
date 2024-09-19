@@ -128,6 +128,7 @@ export default function MigrationNetworks({
       amountLeft={network.balanceV1}
       txHash={hash}
       explorer={network.explorer}
+      network={network.label}
     />
   ) : (
     <div className="bg-purple-light border border-border-light p-[28px] xl:p-[24px] 2xl:p-[32px] rounded-[10px]">

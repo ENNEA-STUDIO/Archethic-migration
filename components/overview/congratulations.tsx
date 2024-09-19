@@ -12,6 +12,7 @@ export type CongratulationsProps = {
   onClick: (back?: boolean) => void;
   amountLeft: bigint;
   explorer: string;
+  network: string;
 };
 
 export default function Congratulations({
@@ -20,6 +21,7 @@ export default function Congratulations({
   amountLeft,
   txHash,
   explorer,
+  network,
 }: CongratulationsProps) {
   return (
     <div className="p-[18px] flex flex-col gap-[24px] bg-purple-light border border-border-light rounded-[10px]">
@@ -54,7 +56,7 @@ export default function Congratulations({
             <NewtworkCard
               className="bg-transparent p-[32px]"
               networkIcon={uco}
-              network="Ethereum"
+              network={network}
               balance={formatEther(amountLeft)}
               balanceLeft={amountLeft > 0n}
               migrationCompleted={false}
