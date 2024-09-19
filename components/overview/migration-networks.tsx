@@ -129,6 +129,7 @@ export default function MigrationNetworks({
       txHash={hash}
       explorer={network.explorer}
       network={network.label}
+      logo={network.icon}
     />
   ) : (
     <div className="bg-purple-light border border-border-light p-[28px] xl:p-[24px] 2xl:p-[32px] rounded-[10px]">

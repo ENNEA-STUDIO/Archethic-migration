@@ -13,6 +13,7 @@ export type CongratulationsProps = {
   amountLeft: bigint;
   explorer: string;
   network: string;
+  logo: string;
 };
 
 export default function Congratulations({
@@ -22,6 +23,7 @@ export default function Congratulations({
   txHash,
   explorer,
   network,
+  logo,
 }: CongratulationsProps) {
   return (
     <div className="p-[18px] flex flex-col gap-[24px] bg-purple-light border border-border-light rounded-[10px]">
@@ -55,7 +57,7 @@ export default function Congratulations({
           <div className={"flex justify-center"}>
             <NewtworkCard
               className="bg-transparent p-[32px]"
-              networkIcon={uco}
+              networkIcon={logo}
               network={network}
               balance={formatEther(amountLeft)}
               balanceLeft={amountLeft > 0n}
